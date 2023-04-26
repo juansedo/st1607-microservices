@@ -1,0 +1,14 @@
+{
+  "name": "st1607-microservices",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "app:web": "node ./apps/web/src/app.js"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "author": "juansedo",
+  "license": "MIT"
+}

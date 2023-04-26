@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "export DEBUG=\"redbicicletas:*\" && nodemon ./bin/www",
-    "start": "export DEBUG=\"redbicicletas:*\" && node ./bin/www"
+    "dev": "export DEBUG=\"redbicicletas:*\" && nodemon ./src/bin/www",
+    "start": "export DEBUG=\"redbicicletas:*\" && node ./src/bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
