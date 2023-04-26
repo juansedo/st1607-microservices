@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "clean:build": "rm -rf dist",
+    "build": "esbuild src/bin/www --bundle --platform=node --target=node18 --outdir=dist",
+    "dev2": "esbuild src/bin/www --bundle --platform=node --outdir=www --watch --servedir=www",
     "dev": "export DEBUG=\"redbicicletas:*\" && nodemon ./src/bin/www",
-    "start": "export DEBUG=\"redbicicletas:*\" && node ./src/bin/www"
+    "start": "export DEBUG=\"redbicicletas:*\" && npm run build && node ./dist/app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "esbuild": "0.17.18",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",

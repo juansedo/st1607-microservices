@@ -1,4 +1,4 @@
-const Bicicleta = require("../model/bicicleta");
+const Bicicleta = require("../database/models/bicicleta");
 
 exports.list = function (re, res) {
   res.send("bicicletas/index");//, { bicis: Bicicleta.allBicis });
@@ -6,7 +6,6 @@ exports.list = function (re, res) {
 
 exports.show = function (req, res) {
   var bici = Bicicleta.findById(req.params.id);
-
   res.send("bicicletas/show");//, { bici });
 };
 
@@ -16,11 +15,8 @@ exports.create_get = function (req, res) {
 
 exports.create_post = function (req, res) {
   var bici = new Bicicleta(req.body.id, req.body.color, req.body.modelo);
-
   bici.ubicacion = [req.body.lat, req.body.lng];
-
   Bicicleta.add(bici);
-
   res.redirect("/bicicletas");
 };
 
