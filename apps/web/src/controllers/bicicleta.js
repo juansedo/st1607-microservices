@@ -1,17 +1,17 @@
-const Bicicleta = require("../models/bicicleta");
+const Bicicleta = require("../model/bicicleta");
 
 exports.list = function (re, res) {
-  res.render("bicicletas/index", { bicis: Bicicleta.allBicis });
+  res.send("bicicletas/index");//, { bicis: Bicicleta.allBicis });
 };
 
 exports.show = function (req, res) {
   var bici = Bicicleta.findById(req.params.id);
 
-  res.render("bicicletas/show", { bici });
+  res.send("bicicletas/show");//, { bici });
 };
 
 exports.create_get = function (req, res) {
-  res.render("bicicletas/create");
+  res.send("bicicletas/create");
 };
 
 exports.create_post = function (req, res) {
