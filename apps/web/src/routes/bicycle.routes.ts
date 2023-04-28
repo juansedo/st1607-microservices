@@ -1,8 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const bicicletaController = require("../controllers/bicicleta");
+import express from 'express';
+import BicycleController from '../controllers/bicycle.controller';
 
-router.get("/", bicicletaController.list);
+const router = express.Router();
+
+router.get('/', BicycleController.index);
 // router.get("/:id/show", bicicletaController.show);
 // router.get("/create", bicicletaController.create_get);
 // router.post("/create", bicicletaController.create_post);
@@ -10,4 +11,4 @@ router.get("/", bicicletaController.list);
 // router.post("/:id/update", bicicletaController.update_post);
 // router.post("/:id/delete", bicicletaController.delete);
 
-module.exports = router;
+export default router;
