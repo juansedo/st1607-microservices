@@ -10,5 +10,12 @@
     "apps/*"
   ],
   "author": "juansedo",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.16.1",
+    "esbuild": "^0.17.18",
+    "esbuild-node-tsc": "^2.0.5",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.0.4"
+  }
 }
