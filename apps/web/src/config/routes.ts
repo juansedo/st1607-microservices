@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import indexRouter from '../routes/index';
+import indexRouter from '../routes/main.routes';
 import BicycleRouter from '../routes/bicycle.routes';
 
 const resolveRoutes = (app: Express) => {
