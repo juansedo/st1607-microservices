@@ -5,6 +5,7 @@
   "scripts": {
     "clean:build": "rm -rf dist",
     "dev": "nodemon",
+    "image:update": "docker build . -t juansedo/web",
     "build": "etsc",
     "start": "node dist/app.js"
   },
