@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+  labels:
+    service: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      name: db
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: st1607-db
+        image: postgres:9.6
+        envFrom:
+        - configMapRef:
+            name: db-secret-credentials
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: red-bici-volume
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: red-bici-volume
+        persistentVolumeClaim:
+          claimName: red-bici-volume-claim

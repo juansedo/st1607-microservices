@@ -6,8 +6,7 @@ COPY package*.json /app/
 RUN npm install
 
 COPY . /app
-
-ENV NODE_ENV QA
+RUN npm run build
 
 # Running on port 3000
 CMD ["npm", "start"]

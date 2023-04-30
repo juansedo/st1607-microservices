@@ -1,29 +1,36 @@
+import { AppDataSource } from '@src/config/data-source';
+import { Bicycle, BicycleDTO } from '@src/database/models/bicycle.model';
 import { Request, Response } from 'express';
-import { BicycleRepository, BicycleType } from '../database/models/bicycle.model';
+
+const bicycleRepository = AppDataSource.getRepository(Bicycle);
 
 class BicycleController {
-	public static index(req: Request, res: Response) {
+	public static async index(req: Request, res: Response) {
 		const message = 'Bicycles retrieved';
-		const data = BicycleRepository.getAll();
+		const data = await bicycleRepository.find();
 		res.json({ message, data });
 	}
 
-	public static show(req: Request, res: Response) {
-		const { id } = req.params;
-		const element = BicycleRepository.findOne(id);
-		if (element) {
-			const message = 'Bicycle found';
-			res.json({ message, data: element });
-		} else {
-			const message = 'Bicycle not found';
-			res.status(404).json({ message });
+	public static async show(req: Request, res: Response) {
+		try {
+			const { id } = req.params;
+			const element = await bicycleRepository.findOneByOrFail({ id });
+			res.json({ message: 'Bicycle found', data: element });
+		} catch (err) {
+			res.status(404).json({ message: 'Bicycle not found' });
 		}
 	}
 
-	public static create(req: Request, res: Response) {
+	public static async create(req: Request, res: Response) {
 		try {
-			const body: BicycleType = req.body;
-			BicycleRepository.createOne(body.color, body.model, body.location);
+			const body: BicycleDTO = req.body;
+			const bicycle = new Bicycle();
+			bicycle.color = body.color;
+			bicycle.model = body.model;
+			bicycle.locationLat = body.location[0];
+			bicycle.locationLng = body.location[1];
+
+			await bicycleRepository.save(bicycle);
 			res.status(201).json({ message: 'Bicycle created' });
 		} catch (err) {
 			console.log(err);
@@ -31,11 +38,19 @@ class BicycleController {
 		}
 	}
 
-	public static update(req: Request, res: Response) {
+	public static async update(req: Request, res: Response) {
 		try {
 			const { id } = req.params;
-			const body: BicycleType = req.body;
-			BicycleRepository.updateOne(id, { color: body.color, model: body.model, location: body.location });
+			const body: BicycleDTO = req.body;
+			const bicycleToUpdate = await bicycleRepository.findOneByOrFail({ id });
+			if (body.color) bicycleToUpdate.color = body.color;
+			if (body.model) bicycleToUpdate.model = body.model;
+			if (body.location) {
+				bicycleToUpdate.locationLat = body.location[0];
+				bicycleToUpdate.locationLng = body.location[1];
+			}
+
+			await bicycleRepository.save(bicycleToUpdate);
 			res.status(201).json({ message: 'Bicycle updated' });
 		} catch (err) {
 			console.log(err);
@@ -43,10 +58,12 @@ class BicycleController {
 		}
 	}
 
-	public static delete(req: Request, res: Response) {
+	public static async delete(req: Request, res: Response) {
 		try {
 			const { id } = req.params;
-			BicycleRepository.deleteOne(id);
+			const bicycleToRemove = await bicycleRepository.findOneByOrFail({ id });
+
+			await bicycleRepository.remove(bicycleToRemove);
 			res.status(201).json({ message: 'Bicycle deleted' });
 		} catch (err) {
 			console.log(err);

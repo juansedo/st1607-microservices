@@ -1,21 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: red-bici-frontend
+  name: frontend-deployment
+  labels:
+    service: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: red-bici
+      app: frontend
   template:
     metadata:
-      name: red-bici
+      name: frontend
       labels:
-        app: red-bici
+        app: frontend
     spec:
       containers:
-      - name: st1607-fe
-        image: juansedo/st1607-fe
+      - name: st1607-front
+        image: juansedo/st1607-front:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 80
