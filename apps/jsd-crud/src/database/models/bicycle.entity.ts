@@ -1,9 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-
-export type BicycleDTO = { id: string; color: string; model: string; location: [number, number] };
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity("bicycles")
-export class Bicycle {
+export class Bicycle extends BaseEntity {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
 	
@@ -19,9 +17,9 @@ export class Bicycle {
 	@Column()
 	model: string;
 	
-	@Column()
+	@Column({ type: "float" })
 	locationLat: number;
 	
-	@Column()
+	@Column({ type: "float" })
 	locationLng: number;
 }
