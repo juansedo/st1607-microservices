@@ -2,6 +2,7 @@
   "name": "jsd-crud",
   "version": "1.0.0",
   "private": true,
+  "author": "juansedo",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",

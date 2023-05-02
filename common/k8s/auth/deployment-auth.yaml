@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+  labels:
+    service: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      name: auth
+      labels:
+        app: auth
+    spec:
+      containers:
+      - name: st1607-auth
+        image: juansedo/st1607-auth:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+        - name: LOGGED_DOMAIN
+          value: http://localhost:30000
+        - name: DOMAIN
+          value: http://localhost:30003
+        - name: GOOGLE_CLIENT_ID
+          value: ...
+        - name: GOOGLE_CLIENT_SECRET
+          value: ...

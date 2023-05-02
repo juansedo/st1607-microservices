@@ -1,5 +1,5 @@
 {
-  "name": "jsd-map",
+  "name": "jsd-auth",
   "version": "1.0.0",
   "private": true,
   "author": "juansedo",
@@ -14,18 +14,22 @@
     "dotenv": "^16.0.3",
     "esbuild": "0.17.18",
     "express": "~4.16.1",
+    "express-session": "^1.17.3",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pg": "^8.10.0",
-    "reflect-metadata": "^0.1.13",
+    "passport": "^0.5.2",
+    "passport-google-oauth2": "^0.2.0",
     "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
-    "typeorm": "^0.3.15"
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
+    "@types/express-session": "^1.17.7",
+    "@types/passport": "^1.0.12",
+    "@types/passport-google-oauth2": "^0.1.5",
     "@types/cookie-parser": "^1.4.3",
     "@types/express": "^4.17.17",
     "@types/morgan": "^1.9.4",
     "nodemon": "^2.0.22"
-  }
+  },
+  "license": "MIT"
 }

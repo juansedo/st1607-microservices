@@ -1,0 +1,7 @@
+{
+	"watch": ["src"],
+	"ignore": ["src/**/*.test.ts", "node_modules"],
+	"ext": "ts,mjs,js,json,graphql",
+	"exec": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/app.js",
+	"legacyWatch": true
+}
