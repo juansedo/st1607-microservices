@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: map
+  labels:
+    service: map
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: map
+  template:
+    metadata:
+      name: map
+      labels:
+        app: map
+    spec:
+      containers:
+      - name: st1607-map
+        image: juansedo/st1607-map:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: map-secret-credentials
