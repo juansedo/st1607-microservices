@@ -23,9 +23,9 @@ spec:
         - containerPort: 3000
         env:
         - name: LOGGED_DOMAIN
-          value: http://localhost:30000
+          value: http://127.0.0.1
         - name: DOMAIN
-          value: http://localhost:30003
+          value: http://127.0.0.1
         - name: GOOGLE_CLIENT_ID
           value: ...
         - name: GOOGLE_CLIENT_SECRET
