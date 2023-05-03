@@ -1,19 +1,26 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import axios from "axios";
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
+import { Icon } from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 const CustomMap = ({ style = { width: "100%", height: "100vh" }}: { style: React.CSSProperties }) => {
-  const items = [
-    { name: 'Bicycle 1', location: { lat: 6.177279, lng: -75.595208 }},
-    { name: 'Bicycle 2', location: { lat: 6.187279, lng: -75.595208 }},
-    { name: 'Bicycle 3', location: { lat: 6.197279, lng: -75.595208 }},
-  ];
-  const position = items[0].location;
+  const [items, setItems] = useState<{ id: string, location: [number, number] }[]>([]);
+  const position = items.length > 0 ? items[0].location: [ 6.177279,  -75.595208 ] as [number, number];
+  
+  useEffect(() => {
+    async function fetchData() {
+      const { data: { data } } = await axios.get("/map");
+      setItems(data);
+    }
+    fetchData();
+  }, []);
   
   const markers = items.map((item, key) => {
     return (
       <React.Fragment key={key}>
-        <Marker position={item.location}>
-          <Popup>{item.name}</Popup>
+        <Marker position={item.location} icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41]})}>
+          <Popup>{item.id}</Popup>
         </Marker>
       </React.Fragment>
     );

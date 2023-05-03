@@ -16,9 +16,6 @@ const Home = () => {
       <Content>
         <h1>Bicycles webpage</h1>
         <CustomMap style={styles.mapContainer} />
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
       </Content>
     </>
   );
