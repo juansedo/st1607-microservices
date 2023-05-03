@@ -35,7 +35,7 @@ class BicycleController {
 			bicycle.locationLng = body.location[1];
 
 			await bicycle.save();
-			res.status(201).json({ message: 'Bicycle created' });
+			res.status(201).json({ message: 'Bicycle created', data: bicycle });
 		} catch (err) {
 			console.log(err);
 			res.status(400).json({ message: 'Bad request' });
